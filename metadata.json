@@ -1,5 +1,5 @@
 {
-  "name": "SermonStack",
+  "name": "Sermon Daily",
   "description": "Sermon notes, morning devotions, church directory, community voices, audio and cards platform.",
   "requestFramePermissions": ["microphone"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]

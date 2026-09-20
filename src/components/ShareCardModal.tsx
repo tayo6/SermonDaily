@@ -105,7 +105,7 @@ function drawCard(p: Sermon): string {
 
   x.fillStyle = '#fff';
   x.font = '700 34px Inter, Arial';
-  x.fillText('Read the full note on SermonStack', 540, 1290);
+  x.fillText('Read the full note on Sermon Daily', 540, 1290);
 
   return cv.toDataURL('image/png');
 }
@@ -128,13 +128,13 @@ export const ShareCardModal: React.FC<ShareCardModalProps> = ({
   const handleDownload = () => {
     const a = document.createElement('a');
     a.href = dataUrl;
-    a.download = 'sermonstack-card.png';
+    a.download = 'sermondaily-card.png';
     a.click();
     onToast('Card downloaded');
   };
 
   const handleCopy = () => {
-    const txt = `${post.title} — ${post.speaker} at ${post.church}\nVia SermonStack`;
+    const txt = `${post.title} — ${post.speaker} at ${post.church}\nVia Sermon Daily`;
     if (navigator.clipboard) {
       navigator.clipboard.writeText(txt).then(() => {
         onToast('Caption copied');

@@ -37,7 +37,7 @@ export function getContributor(id: string): Contributor {
 }
 
 export const CHURCH_DB: Record<string, ChurchInfo> = {
-  'Hope Chapel': { region: 'North America', city: 'Los Angeles', st: 'California', co: 'United States', pastor: '', doc: 'Non-denominational', desc: 'Your home church on SermonStack.', home: true },
+  'Hope Chapel': { region: 'North America', city: 'Los Angeles', st: 'California', co: 'United States', pastor: '', doc: 'Non-denominational', desc: 'Your home church on Sermon Daily.', home: true },
   'Grace Community Church': { region: 'North America', city: 'Sun Valley', st: 'California', co: 'United States', pastor: 'John MacArthur', doc: 'Reformed', desc: 'A historic Bible-teaching community located in the San Fernando Valley, California.' },
   'Bethel Church': { region: 'North America', city: 'Redding', st: 'California', co: 'United States', pastor: 'Bill Johnson', doc: 'Charismatic', desc: 'A congregation pursuing revival culture, worship and the supernatural work of the Holy Spirit.' },
   'The Elevation Church': { region: 'Africa', city: 'Lagos', st: '', co: 'Nigeria', pastor: 'Poju Oyemade', doc: 'Pentecostal', desc: 'Raising a generation of kingdom-minded believers committed to societal transformation.' },

@@ -191,7 +191,7 @@ export default function App() {
         <div className="topbar">
           <div className="wordmark">
             <LogoIcon />
-            SermonStack
+            Sermon Daily
           </div>
           <button
             className="icon-btn"
@@ -580,7 +580,7 @@ export default function App() {
         </button>
       </nav>
     </div>
-    <div className="cap">SermonStack · v7.4 — devotion composer, awareness banner, voice reflections, hashtags hidden</div>
+    <div className="cap">Sermon Daily · v7.4 — devotion composer, awareness banner, voice reflections, hashtags hidden</div>
     </>
   );
 }

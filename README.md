@@ -1,4 +1,4 @@
-# SermonStack
+# Sermon Daily
 
 Sermon notes, morning devotions, church directory, community voices, and interactive audio reflections platform.
 
