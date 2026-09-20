@@ -2,6 +2,15 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Devo } from '../types';
 import { PALETTE } from '../data';
 
+const DEVO_PHOTO_PRESETS = [
+  { label: 'Dawn Glow', url: 'https://images.unsplash.com/photo-1507692049790-de58290a4334?auto=format&fit=crop&w=600&q=80' },
+  { label: 'Morning Light', url: 'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=600&q=80' },
+  { label: 'Altar Fire', url: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=600&q=80' },
+  { label: 'Green Fields', url: 'https://images.unsplash.com/photo-1470246973918-29a93221c455?auto=format&fit=crop&w=600&q=80' },
+  { label: 'Sky & Cloud', url: 'https://images.unsplash.com/photo-1509114397022-ed747cca3f65?auto=format&fit=crop&w=600&q=80' },
+  { label: 'Still Waters', url: 'https://images.unsplash.com/photo-1439853941329-a99ce049f08c?auto=format&fit=crop&w=600&q=80' },
+];
+
 interface DevotionStoryModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -19,6 +28,7 @@ export const DevotionStoryModal: React.FC<DevotionStoryModalProps> = ({
   const [title, setTitle] = useState('');
   const [bodyText, setBodyText] = useState('');
   const [dBGIdx, setDBGIdx] = useState<number>(-1);
+  const [selectedImg, setSelectedImg] = useState<string | null>(DEVO_PHOTO_PRESETS[0].url);
   const bodyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -33,6 +43,7 @@ export const DevotionStoryModal: React.FC<DevotionStoryModalProps> = ({
       setTitle('');
       setBodyText('');
       setDBGIdx(-1);
+      setSelectedImg(DEVO_PHOTO_PRESETS[0].url);
       if (bodyRef.current) {
         bodyRef.current.innerHTML = '';
       }
@@ -78,6 +89,7 @@ export const DevotionStoryModal: React.FC<DevotionStoryModalProps> = ({
       time: 'Now',
       amen: 0,
       bg: dBGIdx,
+      img: selectedImg || undefined,
     };
 
     onPublishStory(newDevo);
@@ -129,7 +141,30 @@ export const DevotionStoryModal: React.FC<DevotionStoryModalProps> = ({
         />
 
         <div className="sec-label" style={{ marginTop: '20px' }}>
-          Story background
+          Photo background
+        </div>
+        <div className="bgrow" id="dPhotoBG">
+          <button
+            type="button"
+            className={`bgsw auto ${selectedImg === null ? 'on' : ''}`}
+            onClick={() => setSelectedImg(null)}
+          >
+            NONE
+          </button>
+          {DEVO_PHOTO_PRESETS.map((preset, i) => (
+            <button
+              key={i}
+              type="button"
+              title={preset.label}
+              className={`bgsw bgsw-img ${selectedImg === preset.url ? 'on' : ''}`}
+              style={{ backgroundImage: `url(${preset.url})` }}
+              onClick={() => setSelectedImg(preset.url)}
+            />
+          ))}
+        </div>
+
+        <div className="sec-label" style={{ marginTop: '14px' }}>
+          Fallback accent tint
         </div>
         <div className="bgrow" id="dBG">
           <button

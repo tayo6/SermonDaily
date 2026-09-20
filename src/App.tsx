@@ -10,6 +10,7 @@ import {
 import {
   CHURCH_DB,
   CONTRIBUTORS,
+  YOU,
   INITIAL_SERMONS,
   INITIAL_DEVOS,
   INITIAL_NOTIFS,
@@ -201,8 +202,12 @@ export default function App() {
             <BellIcon />
             {notifs.length > 0 && <span className="nbdot">{notifs.length}</span>}
           </button>
-          <button className="myav" onClick={() => setProfileOpen(true)}>
-            ME
+          <button className="myav" onClick={() => setProfileOpen(true)} title="Your Profile" aria-label="Your Profile">
+            {YOU.avatarUrl ? (
+              <img src={YOU.avatarUrl} alt="You" referrerPolicy="no-referrer" />
+            ) : (
+              'ME'
+            )}
           </button>
         </div>
 

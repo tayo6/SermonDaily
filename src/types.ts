@@ -3,6 +3,7 @@ export interface Contributor {
   name: string;
   ini: string;
   col: string;
+  avatarUrl?: string;
   church: string;
   doc: string;
   loc: string;
@@ -57,6 +58,7 @@ export interface Devo {
   time: string;
   amen: number;
   bg?: number | string;
+  img?: string;
 }
 
 export interface NotificationItem {

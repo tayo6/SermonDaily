@@ -26,6 +26,7 @@ import {
   SunIcon,
 } from './Icons';
 import { KidArt } from './KidArt';
+import { Avatar } from './Avatar';
 
 // -------------------------------------------------------------
 // HOME VIEW
@@ -184,10 +185,19 @@ export const HomeView: React.FC<HomeViewProps> = ({
       {/* 3. Stories carousel */}
       <div className="stories">
         {!storyUsersOrder.includes('you') && (
-          <div className="story add" onClick={onAddDevotionStory}>
-            <span className="st-plus">+</span>
-            <span className="st-k">YOUR STORY</span>
-            <span className="st-e">Add a morning devotion</span>
+          <div className="story add" onClick={onAddDevotionStory} title="Add a morning devotion">
+            <img
+              src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=300&q=80"
+              alt="Morning devotion"
+              className="story-bg-img"
+              referrerPolicy="no-referrer"
+            />
+            <div className="story-overlay" />
+            <div className="st-content">
+              <span className="st-plus">+</span>
+              <span className="st-k">YOUR STORY</span>
+              <span className="st-e">Add a morning devotion</span>
+            </div>
           </div>
         )}
         {storyUsersOrder.map(u => {
@@ -203,15 +213,26 @@ export const HomeView: React.FC<HomeViewProps> = ({
               style={{ background: devoBG(d) }}
               onClick={() => onOpenStoryUser(u)}
             >
-              <span className="st-k">{isMine ? 'YOUR STORY' : 'DEVOTION'}</span>
-              <span className="st-t">{d.title}</span>
-              <span className="st-sp" />
-              <span className="st-b">
-                <span className="av" style={{ background: author.col }}>{author.ini}</span>
-                <span className="st-n">
-                  {isMine ? 'You' : author.name.split(' ')[0]} · {d.time}
+              {d.img && (
+                <img
+                  src={d.img}
+                  alt={d.title}
+                  className="story-bg-img"
+                  referrerPolicy="no-referrer"
+                />
+              )}
+              <div className="story-overlay" />
+              <div className="st-inner">
+                <span className="st-k">{isMine ? 'YOUR STORY' : 'DEVOTION'}</span>
+                <span className="st-t">{d.title}</span>
+                <span className="st-sp" />
+                <span className="st-b">
+                  <Avatar contributor={author} size="xs" />
+                  <span className="st-n">
+                    {isMine ? 'You' : author.name.split(' ')[0]} · {d.time}
+                  </span>
                 </span>
-              </span>
+              </div>
             </div>
           );
         })}
@@ -281,7 +302,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             if (layoutStyle === 'compact') {
               return (
                 <article key={p.id} className="crow" onClick={() => onOpenPost(p.id)}>
-                  <span className="av sm" style={{ background: author.col }}>{author.ini}</span>
+                  <Avatar contributor={author} size="sm" />
                   <div className="c-mid">
                     <div className="c-t">{p.title}</div>
                     <div className="c-m">{p.church} · {author.name} · {p.date}</div>
@@ -315,7 +336,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     <h3>{p.title}</h3>
                     <p>{p.excerpt.replace(/<[^>]*>/g, '').slice(0, 70)}</p>
                     <div className="kby">
-                      <span className="av" style={{ background: author.col }}>{author.ini}</span>
+                      <Avatar contributor={author} size="sm" />
                       <span>{author.name.split(' ')[0]} · {p.church}</span>
                       <button
                         className={`act amen ${isPostAmen ? 'on' : ''}`}
@@ -339,7 +360,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   </div>
                   <div className="fcard-in">
                     <div className="byline" style={{ marginBottom: '8px' }}>
-                      <span className="av" style={{ background: author.col }}>{author.ini}</span>
+                      <Avatar contributor={author} />
                       <div className="by-mid">
                         <div className="by-name">{author.name} {author.ver && <VerIcon />}</div>
                         <div className="by-meta">
@@ -405,7 +426,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             return (
               <article key={p.id} className="post" onClick={() => onOpenPost(p.id)}>
                 <div className="byline">
-                  <span className="av" style={{ background: author.col }}>{author.ini}</span>
+                  <Avatar contributor={author} />
                   <div className="by-mid">
                     <div className="by-name">{author.name} {author.ver && <VerIcon />}</div>
                     <div className="by-meta">
@@ -652,7 +673,7 @@ export const ExploreView: React.FC<ExploreViewProps> = ({
                     <span className="cw-l">Writers for this church</span>
                     <div className="cw-r">
                       {writers.slice(0, 3).map(w => (
-                        <span key={w.id} className="av" style={{ background: w.col }}>{w.ini}</span>
+                        <Avatar key={w.id} contributor={w} size="xs" />
                       ))}
                       <span className="cw-n">{writerNames}</span>
                     </div>
@@ -814,7 +835,7 @@ export const TrendyView: React.FC<TrendyViewProps> = ({
               const author = getContributor(p.by);
               return (
                 <article key={p.id} className="crow" onClick={() => onOpenPost(p.id)}>
-                  <span className="av sm" style={{ background: author.col }}>{author.ini}</span>
+                  <Avatar contributor={author} size="sm" />
                   <div className="c-mid">
                     <div className="c-t">{p.title}</div>
                     <div className="c-m">{p.church} · {p.speaker}</div>
@@ -833,7 +854,7 @@ export const TrendyView: React.FC<TrendyViewProps> = ({
             const author = getContributor(d.by);
             return (
               <article key={d.id} className="crow" onClick={() => onOpenStoryUser(d.by)}>
-                <span className="av sm" style={{ background: author.col }}>{author.ini}</span>
+                <Avatar contributor={author} size="sm" />
                 <div className="c-mid">
                   <div className="c-t" style={{ fontSize: '14px' }}>{d.title}</div>
                   <div className="c-m">{d.scr} · {author.name}</div>
@@ -848,7 +869,7 @@ export const TrendyView: React.FC<TrendyViewProps> = ({
           </div>
           {matchingContributors.map(c => (
             <article key={c.id} className="crow" onClick={() => onOpenContributor(c.id)}>
-              <span className="av sm" style={{ background: c.col }}>{c.ini}</span>
+              <Avatar contributor={c} size="sm" />
               <div className="c-mid">
                 <div className="c-t">{c.name} {c.ver && <VerIcon />}</div>
                 <div className="c-m">{c.church} · {c.doc}</div>
@@ -1018,7 +1039,7 @@ export const VoicesView: React.FC<VoicesViewProps> = ({
                 onClick={() => onOpenContributor(c.id)}
               >
                 <span className={`medal ${rank <= 3 ? `m${rank}` : ''}`}>{rank}</span>
-                <span className="av" style={{ background: c.col }}>{c.ini}</span>
+                <Avatar contributor={c} />
                 <div className="v-mid">
                   <div className="v-name">{c.name} {c.ver && <VerIcon />}</div>
                   <div className="v-sub">{c.doc} · {c.loc}</div>
@@ -1109,7 +1130,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({
 
       <div className="fbody" id="pBody">
         <div className="p-head">
-          <span className="av lg" style={{ background: YOU.col }}>{YOU.ini}</span>
+          <Avatar contributor={YOU} size="lg" />
           <div>
             <div className="v-name" style={{ fontSize: '19px' }}>You</div>
             <div className="v-sub">{YOU.church} · {YOU.doc}</div>

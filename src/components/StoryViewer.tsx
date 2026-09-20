@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Devo, Contributor } from '../types';
 import { seriesCol, getContributor, devoBG } from '../data';
 import { HeartIcon } from './Icons';
+import { Avatar } from './Avatar';
 
 interface StoryViewerProps {
   isOpen: boolean;
@@ -79,43 +80,56 @@ export const StoryViewer: React.FC<StoryViewerProps> = ({
   return (
     <div className={`storyview ${isOpen ? 'open' : ''}`}>
       <div className="sv-card" style={{ background: devoBG(currentDevo) }}>
-        <div className="sv-segs">
-          {devos.map((_, i) => {
-            const fill = i < idx ? 100 : i > idx ? 0 : Math.min(100, (elapsed / DUR) * 100);
-            return (
-              <span key={i} className="seg">
-                <i style={{ width: `${fill}%` }}></i>
-              </span>
-            );
-          })}
-        </div>
+        {currentDevo.img && (
+          <img
+            src={currentDevo.img}
+            alt={currentDevo.title}
+            className="sv-bg-img"
+            referrerPolicy="no-referrer"
+          />
+        )}
+        <div className="sv-overlay" />
 
-        <div className="sv-author" onClick={() => { onClose(); onOpenContributor(authorId); }}>
-          <span className="av" style={{ background: author.col }}>{author.ini}</span>
-          <div className="sv-an">
-            <b>{author.name}</b>
-            <span>{author.church} · {currentDevo.time}</span>
+        <div className="sv-content">
+          <div className="sv-segs">
+            {devos.map((_, i) => {
+              const fill = i < idx ? 100 : i > idx ? 0 : Math.min(100, (elapsed / DUR) * 100);
+              return (
+                <span key={i} className="seg">
+                  <i style={{ width: `${fill}%` }}></i>
+                </span>
+              );
+            })}
           </div>
-          <button className="icon-btn" onClick={(e) => { e.stopPropagation(); onClose(); }} style={{ color: '#fff' }}>
-            ✕
-          </button>
-        </div>
 
-        <div className="sv-body">
-          <span className="sv-scr">{currentDevo.scr || 'Morning Devotion'}</span>
-          <h1>{currentDevo.title}</h1>
-          <p>{currentDevo.text}</p>
-        </div>
+          <div className="sv-author" onClick={() => { onClose(); onOpenContributor(authorId); }}>
+            <Avatar contributor={author} size="sm" />
+            <div className="sv-an">
+              <b>{author.name}</b>
+              <span>{author.church} · {currentDevo.time}</span>
+            </div>
+            <button className="icon-btn" onClick={(e) => { e.stopPropagation(); onClose(); }} style={{ color: '#fff' }} aria-label="Close story">
+              ✕
+            </button>
+          </div>
 
-        <div className="sv-foot">
-          <input placeholder="Reply with a prayer…" onClick={(e) => e.stopPropagation()} />
-          <button
-            className={`act amen ${amenD[currentDevo.id] ? 'on' : ''}`}
-            onClick={(e) => { e.stopPropagation(); onToggleAmenD(currentDevo.id); }}
-          >
-            <HeartIcon filled={amenD[currentDevo.id]} />
-            <b>{currentDevo.amen + (amenD[currentDevo.id] ? 1 : 0)}</b>
-          </button>
+          <div className="sv-body">
+            <span className="sv-scr">{currentDevo.scr || 'Morning Devotion'}</span>
+            <h1>{currentDevo.title}</h1>
+            <p>{currentDevo.text}</p>
+          </div>
+
+          <div className="sv-foot">
+            <input placeholder="Reply with a prayer…" onClick={(e) => e.stopPropagation()} />
+            <button
+              className={`act amen ${amenD[currentDevo.id] ? 'on' : ''}`}
+              onClick={(e) => { e.stopPropagation(); onToggleAmenD(currentDevo.id); }}
+              aria-label="Amen"
+            >
+              <HeartIcon filled={amenD[currentDevo.id]} />
+              <b>{currentDevo.amen + (amenD[currentDevo.id] ? 1 : 0)}</b>
+            </button>
+          </div>
         </div>
 
         <div className="sv-zone l" onClick={prevStory} />

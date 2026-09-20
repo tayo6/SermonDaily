@@ -10,6 +10,7 @@ import {
   UserIcon,
   VerIcon,
 } from './Icons';
+import { Avatar } from './Avatar';
 
 interface ChurchSheetProps {
   churchName: string | null;
@@ -192,7 +193,7 @@ export const ChurchSheet: React.FC<ChurchSheetProps> = ({
                     style={{ padding: '13px 0' }}
                     onClick={() => { onClose(); onOpenContributor(c.id); }}
                   >
-                    <span className="av sm" style={{ background: c.col }}>{c.ini}</span>
+                    <Avatar contributor={c} size="sm" />
                     <div className="c-mid">
                       <div className="c-t">{c.name} {c.ver && <VerIcon />}</div>
                       <div className="c-m">{c.notes} notes · {c.followers} followers</div>
@@ -258,7 +259,7 @@ export const ContributorSheet: React.FC<ContributorSheetProps> = ({
         </div>
         <div className="sheet-body">
           <div className="cs-head">
-            <span className="av lg" style={{ background: c.col }}>{c.ini}</span>
+            <Avatar contributor={c} size="lg" />
             <div>
               <div className="v-name" style={{ fontSize: '18px' }}>
                 {c.name} {c.ver && <VerIcon />}
@@ -335,7 +336,7 @@ export const ContributorSheet: React.FC<ContributorSheetProps> = ({
                 onClick={() => { onClose(); onOpenPost(p.id); }}
                 style={{ padding: '13px 0' }}
               >
-                <span className="av sm" style={{ background: c.col }}>{c.ini}</span>
+                <Avatar contributor={c} size="sm" />
                 <div className="c-mid">
                   <div className="c-t">{p.title}</div>
                   <div className="c-m">{p.date} · {p.read}</div>
@@ -530,7 +531,7 @@ export const SeriesPage: React.FC<SeriesPageProps> = ({
               className="sp-row"
               onClick={() => { onClose(); onOpenPost(p.id); }}
             >
-              <span className="av sm" style={{ background: author.col }}>{author.ini}</span>
+              <Avatar contributor={author} size="sm" />
               <div className="c-mid">
                 <div className="c-t">{p.title}</div>
                 <div className="c-m">{p.church} · {p.date} · {p.speaker}</div>

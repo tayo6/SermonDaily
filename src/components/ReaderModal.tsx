@@ -19,6 +19,7 @@ import {
 } from './Icons';
 import { Mic, Square, Trash2, Volume2, Play as LPlay, Pause as LPause } from 'lucide-react';
 import { KidArt } from './KidArt';
+import { Avatar } from './Avatar';
 
 // Waveform audio pill for fellowship voice reflections matching v7.4
 const RfAudioPill: React.FC<{
@@ -507,7 +508,7 @@ export const ReaderModal: React.FC<ReaderModalProps> = ({
               <KidArt kind={post.kidsart || 'lion'} />
             </div>
             <div className="byline" style={{ margin: '16px 0 2px' }}>
-              <span className="av" style={{ background: author.col }}>{author.ini}</span>
+              <Avatar contributor={author} />
               <div className="by-mid">
                 <div className="by-name">
                   {author.name}
@@ -551,7 +552,7 @@ export const ReaderModal: React.FC<ReaderModalProps> = ({
         ) : (
           <>
             <div className="byline" style={{ marginBottom: '2px' }}>
-              <span className="av" style={{ background: author.col }}>{author.ini}</span>
+              <Avatar contributor={author} />
               <div className="by-mid">
                 <div className="by-name">
                   {author.name}
@@ -670,7 +671,7 @@ export const ReaderModal: React.FC<ReaderModalProps> = ({
                 const dur = r.dur || r.audioDuration || 4;
                 return (
                   <div key={i} className="rf-item">
-                    <span className="av sm" style={{ background: rAuthor.col }}>{rAuthor.ini}</span>
+                    <Avatar contributor={rAuthor} size="sm" />
                     <div className="rf-body">
                       <div className="rf-n">
                         {rAuthor.name}
